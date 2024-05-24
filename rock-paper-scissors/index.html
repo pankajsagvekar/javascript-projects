@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body class="bg-slate-800">
+    <div class="flex justify-center items-center min-h-screen flex-col">
+        <h1 class="flex absolute top-0 mt-20 text-white text-3xl font-serif font-bold animate-bounce"><i data-feather="crosshair" class="text-white inline mx-2 h-10 w-10"></i>Rock Paper Scissors</h1>
+        <div class="flex items-center flex-col gap-5">
+            <div class="text-white text-xl text-center transition-all duration-300 font-mono">
+                <h2 class="capitalize flex items-center gap-2 mt-2"><i data-feather="user" class="text-green-300 inline"></i> Choice: <span id="user-choice"></span></h2>
+                <h2 class="capitalize flex items-center gap-2 mt-2"><i data-feather="terminal" class="text-sky-300 inline"></i> Choice: <span id="com-choice"></span></h2>
+                <h2 class="capitalize flex items-center gap-2 mt-2 animate-pulse"><i data-feather="heart" class="inline text-red-500"></i> Result: <span id="result"></span></h2>
+            </div>
+        
+            <div class="font-mono font-semibold mt-2">
+                <button class="bg-white text-slate-800 px-5 py-2 border border-white hover:bg-transparent hover:text-white transition-all duration-300" id="rock">Rock</button>
+                <button class="bg-white text-slate-800 px-5 py-2 border border-white hover:bg-transparent hover:text-white transition-all duration-300" id="paper">Paper</button>
+                <button class="bg-white text-slate-800 px-5 py-2 border border-white hover:bg-transparent hover:text-white transition-all duration-300" id="scissors">Scissors</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="app.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

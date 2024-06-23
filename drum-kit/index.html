@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drum-Kit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="keys">
+        <div data-key="65" class="key" onclick="playSoundOnClick(65)">
+            <kbd>A</kbd> <!-- keyboard tag -->
+            <span class="sound">clap</span>
+        </div>
+        <div data-key="83" class="key" onclick="playSoundOnClick(83)">
+            <kbd>S</kbd> <!-- keyboard tag -->
+            <span class="sound">hihat</span>
+        </div>
+        <div data-key="68" class="key" onclick="playSoundOnClick(68)">
+            <kbd>D</kbd> <!-- keyboard tag -->
+            <span class="sound">kick</span>
+        </div>
+        <div data-key="70" class="key" onclick="playSoundOnClick(70)">
+            <kbd>F</kbd> <!-- keyboard tag -->
+            <span class="sound">openhat</span>
+        </div>
+        <div data-key="71" class="key" onclick="playSoundOnClick(71)">
+            <kbd>G</kbd> <!-- keyboard tag -->
+            <span class="sound">boom</span>
+        </div>
+        <div data-key="72" class="key" onclick="playSoundOnClick(72)">
+            <kbd>H</kbd> <!-- keyboard tag -->
+            <span class="sound">ride</span>
+        </div>
+        <div data-key="74" class="key" onclick="playSoundOnClick(74)">
+            <kbd>J</kbd> <!-- keyboard tag -->
+            <span class="sound">snare</span>
+        </div>
+        <div data-key="75" class="key" onclick="playSoundOnClick(75)">
+            <kbd>K</kbd> <!-- keyboard tag -->
+            <span class="sound">tom</span>
+        </div>
+        <div data-key="76" class="key" onclick="playSoundOnClick(75)">
+            <kbd>L</kbd> <!-- keyboard tag -->
+            <span class="sound">tink</span>
+        </div>
+    </div>
+
+    <audio data-key="65" src="sounds/clap.wav"></audio>
+    <audio data-key="83" src="sounds/hihat.wav"></audio>
+    <audio data-key="68" src="sounds/kick.wav"></audio>
+    <audio data-key="70" src="sounds/openhat.wav"></audio>
+    <audio data-key="71" src="sounds/boom.wav"></audio>
+    <audio data-key="72" src="sounds/ride.wav"></audio>
+    <audio data-key="74" src="sounds/snare.wav"></audio>
+    <audio data-key="75" src="sounds/tom.wav"></audio>
+    <audio data-key="76" src="sounds/tink.wav"></audio>
+
+    <script>
+        function playSound(e){
+            //console.log(e.keyCode); //display keys
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+            if(!audio)
+                return; //stops function from running
+            audio.currentTime = 0; //can rewind to start and we can hit it multiple times
+            audio.play();
+
+            key.classList.add('playing'); //add playing animation
+        }
+
+        function playSoundOnClick(keyCode){
+            const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+            const key = document.querySelector(`.key[data-key="${keyCode}"]`);
+            if(!audio)
+                return; // stop function if audio element not found
+            audio.currentTime = 0;
+            audio.play();
+            key.classList.add('playing');
+        }
+
+        function removeTransition(e){
+            if(e.propertyName !== 'transform')
+                return; //skip it if it's not transform
+            //console.log(e.propertyName);
+            //console.log(this); //to check if we are selection the key element
+            this.classList.remove('playing');
+        }
+
+        const keys = document.querySelectorAll('.key');
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition)); //we made removeTransition function which will fire when the transition is ended
+        window.addEventListener('keydown', playSound)
+    </script>
+</body>
+</html>
